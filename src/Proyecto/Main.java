@@ -84,11 +84,18 @@ public class Main {
                             parcelaActiva.agregarFigura(new Cuadrado(lado));
                             break;
                         case 2:
-                            System.out.println("Introduce los lados del triángulo (base, lado1, lado2):");
-                            double base = sc.nextDouble();
-                            double lado1 = sc.nextDouble();
-                            double lado2 = sc.nextDouble();
+                            double base, lado1, lado2;
+                            do {
+                                System.out.println("Introduce los lados del triángulo (base, lado1, lado2):");
+                                base = sc.nextDouble();
+                                lado1 = sc.nextDouble();
+                                lado2 = sc.nextDouble();
+                                if ((lado1 + lado2 <= base) || (lado1 + base <= lado2) || (lado2 + base <= lado1)) {
+                                    System.out.println("Los lados introducidos no forman un triángulo válido. ¡Introduce lados que cumplan la desigualdad triangular!");
+                                }
+                            } while ((lado1 + lado2 <= base) || (lado1 + base <= lado2) || (lado2 + base <= lado1));
                             parcelaActiva.agregarFigura(new Triangulo(base, lado1, lado2));
+                            System.out.println("Triángulo creado");
                             break;
                         case 3:
                             System.out.println("Introduce la base y la altura del rectángulo:");
@@ -107,6 +114,7 @@ public class Main {
                         default:
                             System.out.println("Figura no reconocida. ¡Introduce una figura válida!");
                     }
+                    break;
                 case 4:
                     // Calcular área total
                     // Tomamos y arreglamos la excepción por si se da el caso de que el usuario elige una opción sin haber creado una parcela
